@@ -3,8 +3,9 @@
 # Gitlab SSH key setup is prerequirement.
 
 declare -r PRIVATE_TOKEN="" # Gitlab personal access token (read scopes are enough)
-declare -r BACKUP_FOLDER="./GitlabBackup/" # Backup target folder
-
+declare -r BACKUP_BASE_FOLDER="" # Backup target folder
+declare -r BACKUP_FOLDER="$BACKUP_BASE_FOLDER/live/"
+declare -r ARCHIVED_FOLDER="$BACKUP_BASE_FOLDER/archived/"
 declare -r END_RESPONSE="{\"error\":\"page is invalid\"}"
 
 page=1
@@ -12,6 +13,8 @@ projects=""
 
 echo "[Backup started]"
 
+rm -rf $ARCHIVED_FOLDER
+mv $BACKUP_FOLDER $ARCHIVED_FOLDER
 mkdir $BACKUP_FOLDER
 
 cd $BACKUP_FOLDER
