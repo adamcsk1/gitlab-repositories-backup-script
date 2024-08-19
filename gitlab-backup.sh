@@ -31,8 +31,8 @@ while [ "$projects" != "$END_RESPONSE" ]; do
             }
 
             name_with_namespace=$( _jq '.name_with_namespace')
-            folder_name=$(echo $name_with_namespace | sed 's/ \/ /-/g')
-            folder_name_cleared=$(echo $folder_name | sed 's/ //g')
+            folder_name=$(echo $name_with_namespace | sed 's/ \/ /--/g')
+            folder_name_cleared=$(echo $folder_name | sed 's/ /-/g')
             ssh_url_to_repo=$(_jq '.ssh_url_to_repo')
 
            echo "folder_name=$folder_name_cleared ; ssh_url_to_repo=$ssh_url_to_repo"
